@@ -2554,7 +2554,7 @@ export class MessageManager extends CachedManager<Snowflake, Message, MessageRes
   public fetchPinned(cache?: boolean): Promise<Collection<Snowflake, Message>>;
   public react(message: MessageResolvable, emoji: EmojiIdentifierResolvable): Promise<void>;
   public pin(message: MessageResolvable): Promise<void>;
-  public search(query?: MessageSearchOptions): Promise<Collection<Snowflake, Message>>;
+  public search(options?: MessageSearchOptions): Promise<Collection<Snowflake, Message>>;
   public unpin(message: MessageResolvable): Promise<void>;
 }
 
