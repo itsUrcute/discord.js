@@ -181,6 +181,9 @@ class MessageManager extends CachedManager {
   async search({ cache = true, ...query } = {}) {
     const data = await this.client.api.channels[this.channel.id].messages.search.get({ query });
     const messages = new Collection();
+
+    if (query.sortOrder === 'asc') data.messages.reverse();
+
     for (const message of data.messages.flat()) messages.set(message.id, this._add(message, cache));
     return messages;
   }
