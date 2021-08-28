@@ -165,6 +165,27 @@ class MessageManager extends CachedManager {
   }
 
   /**
+   * Performs a search within the channel.
+   * This is only available when using a user account.
+   * @param {MessageSearchOptions} [options={}] Options to pass to the search
+   * @returns {Promise<MessageSearchResult>}
+   * @example
+   * channel.search({
+   *   content: 'discord.js',
+   *   limit: '2016-11-17'
+   * }).then(res => {
+   *   const hit = res.messages[0].find(m => m.hit).content;
+   *   console.log(`I found: **${hit}**, total results: ${res.totalResults}`);
+   * }).catch(console.error);
+   */
+  async search(query = {}, cache = true) {
+    const data = await this.client.api.channels[this.channel.id].messages.search.get({ query });
+    const messages = new Collection();
+    for (const message of data.messages.flat()) messages.set(message.id, this._add(message, cache));
+    return messages;
+  }
+
+  /**
    * Unpins a message from the channel's pinned messages, even if it's not cached.
    * @param {MessageResolvable} message The message to unpin
    * @returns {Promise<void>}

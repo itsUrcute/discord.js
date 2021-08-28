@@ -2554,6 +2554,7 @@ export class MessageManager extends CachedManager<Snowflake, Message, MessageRes
   public fetchPinned(cache?: boolean): Promise<Collection<Snowflake, Message>>;
   public react(message: MessageResolvable, emoji: EmojiIdentifierResolvable): Promise<void>;
   public pin(message: MessageResolvable): Promise<void>;
+  public search(query: MessageSearchOptions, cache?: boolean): Promise<Collection<Snowflake, Message>>;
   public unpin(message: MessageResolvable): Promise<void>;
 }
 
@@ -3041,6 +3042,44 @@ export type Base64String = string;
 export interface BaseFetchOptions {
   cache?: boolean;
   force?: boolean;
+}
+
+export interface MessageSearchOptions {
+	content?: string;
+	maxID?: Snowflake;
+	minID?: Snowflake;
+	has?:
+		| 'link'
+		| 'embed'
+		| 'file'
+		| 'video'
+		| 'image'
+		| 'sound'
+		| '-link'
+		| '-embed'
+		| '-file'
+		| '-video'
+		| '-image'
+		| '-sound';
+	channel?: ChannelResolvable;
+	author?: UserResolvable;
+	authorType?: 'user' | 'bot' | 'webhook' | '-user' | '-bot' | '-webhook';
+	sortBy?: 'relevant' | 'recent';
+	sortOrder?: 'asc' | 'desc';
+	contextSize?: number;
+	limit?: number;
+	offset?: number;
+	mentions?: UserResolvable;
+	mentionsEveryone?: boolean;
+	linkHostname?: string;
+	embedProvider?: string;
+	embedType?: 'image' | 'video' | 'url' | 'rich';
+	attachmentFilename?: string;
+	attachmentExtension?: string;
+	before?: Date;
+	after?: Date;
+	during?: Date;
+	nsfw?: boolean;
 }
 
 export interface BaseMessageComponentOptions {
