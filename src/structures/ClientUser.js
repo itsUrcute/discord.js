@@ -11,6 +11,14 @@ class ClientUser extends User {
   _patch(data) {
     super._patch(data);
 
+    if ('premium' in data) {
+      /**
+       * Whether or not this account has Nitro
+       * @type {boolean}
+       */
+      this.premium = data.premium;
+    }
+
     if ('verified' in data) {
       /**
        * Whether or not this account has been verified
@@ -33,8 +41,8 @@ class ClientUser extends User {
   }
 
   /**
-   * Represents the client user's presence
-   * @type {ClientPresence}
+   * ClientUser's presence
+   * @type {Presence}
    * @readonly
    */
   get presence() {
@@ -109,7 +117,7 @@ class ClientUser extends User {
   /**
    * Sets the full presence of the client user.
    * @param {PresenceData} data Data for the presence
-   * @returns {ClientPresence}
+   * @returns {Presence}
    * @example
    * // Set the client user's presence
    * client.user.setPresence({ activities: [{ name: 'with discord.js' }], status: 'idle' });
@@ -131,7 +139,7 @@ class ClientUser extends User {
    * Sets the status of the client user.
    * @param {PresenceStatusData} status Status to change to
    * @param {number|number[]} [shardId] Shard id(s) to have the activity set on
-   * @returns {ClientPresence}
+   * @returns {Presence}
    * @example
    * // Set the client user's status
    * client.user.setStatus('idle');
@@ -153,7 +161,7 @@ class ClientUser extends User {
    * Sets the activity the client user is playing.
    * @param {string|ActivityOptions} [name] Activity being played, or options for setting the activity
    * @param {ActivityOptions} [options] Options for setting the activity
-   * @returns {ClientPresence}
+   * @returns {Presence}
    * @example
    * // Set the client user's activity
    * client.user.setActivity('discord.js', { type: 'WATCHING' });
@@ -169,7 +177,7 @@ class ClientUser extends User {
    * Sets/removes the AFK flag for the client user.
    * @param {boolean} afk Whether or not the user is AFK
    * @param {number|number[]} [shardId] Shard Id(s) to have the AFK flag set on
-   * @returns {ClientPresence}
+   * @returns {Presence}
    */
   setAFK(afk, shardId) {
     return this.setPresence({ afk, shardId });

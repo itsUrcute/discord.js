@@ -477,6 +477,7 @@ export class ClientPresence extends Presence {
 }
 
 export class ClientUser extends User {
+  public premium?: boolean;
   public mfaEnabled: boolean;
   public readonly presence: ClientPresence;
   public verified: boolean;
