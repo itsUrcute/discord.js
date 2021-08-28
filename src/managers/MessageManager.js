@@ -168,7 +168,7 @@ class MessageManager extends CachedManager {
    * Performs a search within the channel.
    * This is only available when using a user account.
    * @param {MessageSearchOptions} [options={}] Options to pass to the search
-   * @returns {Promise<MessageSearchResult>}
+   * @returns {Promise<Collection<Snowflake, Message>>}
    * @example
    * channel.search({
    *   content: 'discord.js',
