@@ -10,6 +10,14 @@ const DataResolver = require('../util/DataResolver');
 class ClientUser extends User {
   _patch(data) {
     super._patch(data);
+    
+    if ('premium' in data) {
+      /**
+       * Whether or not this account has Nitro
+       * @type {boolean}
+       */
+      this.premium = data.premium;
+    }
 
     if ('verified' in data) {
       /**

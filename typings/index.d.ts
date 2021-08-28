@@ -468,6 +468,7 @@ export class ClientApplication extends Application {
 }
 
 export class ClientUser extends User {
+  public premium?: boolean;
   public mfaEnabled: boolean;
   public verified: boolean;
   public edit(data: ClientUserEditData): Promise<this>;
