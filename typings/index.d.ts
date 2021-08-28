@@ -2554,7 +2554,7 @@ export class MessageManager extends CachedManager<Snowflake, Message, MessageRes
   public fetchPinned(cache?: boolean): Promise<Collection<Snowflake, Message>>;
   public react(message: MessageResolvable, emoji: EmojiIdentifierResolvable): Promise<void>;
   public pin(message: MessageResolvable): Promise<void>;
-  public search(query: MessageSearchOptions, cache?: boolean): Promise<Collection<Snowflake, Message>>;
+  public search(query?: MessageSearchOptions): Promise<Collection<Snowflake, Message>>;
   public unpin(message: MessageResolvable): Promise<void>;
 }
 
@@ -3044,7 +3044,7 @@ export interface BaseFetchOptions {
   force?: boolean;
 }
 
-export interface MessageSearchOptions {
+export interface MessageSearchOptions extends Omit<BaseFetchOptions, 'force'> {
 	content?: string;
 	maxID?: Snowflake;
 	minID?: Snowflake;

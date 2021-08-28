@@ -178,7 +178,7 @@ class MessageManager extends CachedManager {
    *   console.log(`I found: **${hit}**, total results: ${res.totalResults}`);
    * }).catch(console.error);
    */
-  async search(query = {}, cache = true) {
+  async search({ cache = true, ...query } = {}) {
     const data = await this.client.api.channels[this.channel.id].messages.search.get({ query });
     const messages = new Collection();
     for (const message of data.messages.flat()) messages.set(message.id, this._add(message, cache));
